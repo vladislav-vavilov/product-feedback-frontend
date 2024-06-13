@@ -6,7 +6,9 @@ import { Post } from './pages/Post'
 const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Home />} />
+      <Route path='/' element={<Home />}>
+        <Route path=':category' element={<Home />} />
+      </Route>
       <Route path='/posts'>
         <Route path=':postId' element={<Post />} />
       </Route>
