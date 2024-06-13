@@ -23,7 +23,7 @@ export const PostsItem: FC<PostsItemProps> = ({
 }) => {
   return (
     <div className='section flex items-start gap-4 transition-colors duration-200'>
-      <button className='button p-2.5'>
+      <button className='button flex flex-col items-center p-2.5'>
         <IoIosArrowUp className='text-blue-700' size={20} />
         <span className='font-bold text-black'>{upvotes}</span>
       </button>
