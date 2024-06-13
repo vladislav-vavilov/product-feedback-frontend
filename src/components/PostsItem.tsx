@@ -22,13 +22,15 @@ export const PostsItem: FC<PostsItemProps> = ({
   upvotes
 }) => {
   return (
-    <Link to={`/posts/${id}`} className='section flex items-start gap-4'>
+    <div className='section flex items-start gap-4 transition-colors duration-200'>
       <button className='button p-2.5'>
         <IoIosArrowUp className='text-blue-700' size={20} />
         <span className='font-bold text-black'>{upvotes}</span>
       </button>
       <div className='flex flex-auto flex-col gap-2'>
-        <h3 className='text-xl font-bold'>{title}</h3>
+        <Link to={`/posts/${id}`} className='text-xl font-bold hover:underline'>
+          {title}
+        </Link>
         <p className='text-gray-600'>{description}</p>
         <div className='button'>{categories[category]}</div>
       </div>
@@ -36,6 +38,6 @@ export const PostsItem: FC<PostsItemProps> = ({
         <FiMessageCircle size={20} />
         <span className='text-lg font-bold'>{comments}</span>
       </div>
-    </Link>
+    </div>
   )
 }
