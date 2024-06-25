@@ -5,7 +5,7 @@ import { Categories } from '../components/Categories'
 
 export const Home: FC = () => {
   return (
-    <div className='mx-auto flex h-full max-w-5xl flex-col gap-4 pt-[10vh]'>
+    <div className='flex flex-col gap-4'>
       <Header />
       <div className='flex gap-4'>
         <Categories />

@@ -1,8 +1,30 @@
-import { FC, PropsWithChildren } from 'react'
+import { FC, ReactNode } from 'react'
+import { cn } from '../../utils'
 
-export const Button: FC = ({ children }: PropsWithChildren) => {
+interface ButtonProps {
+  children: ReactNode
+  className?: string
+  variant?: 'primary' | 'secondary'
+  size?: 'sm' | 'base'
+}
+
+export const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  variant = 'primary',
+  size = 'base'
+}) => {
   return (
-    <button className='rounded-md bg-gray-100 px-4 py-1.5 text-sm font-medium text-blue-700 transition-colors duration-200 hover:bg-blue-100 [&.active]:bg-blue-700 [&.active]:text-white'>
+    <button
+      className={cn(
+        'button',
+        {
+          active: variant === 'primary',
+          'py-2 text-base': size === 'base'
+        },
+        className
+      )}
+    >
       {children}
     </button>
   )

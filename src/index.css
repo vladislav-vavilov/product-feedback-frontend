@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+input,
+textarea {
+  @apply outline-none;
+}
+
 @layer components {
   .section {
     @apply rounded-md bg-white p-4;

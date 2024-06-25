@@ -1,10 +1,12 @@
 import { FC } from 'react'
-import { categories } from '../constants'
+import { categories } from '../../constants'
 import { IoIosArrowUp } from 'react-icons/io'
 import { FiMessageCircle } from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
+import { cn } from '../../utils'
+import { Button } from '../ui/Button'
 
-interface PostsItemProps {
+interface PostCardProps {
   id: string
   title: string
   description: string
@@ -13,7 +15,7 @@ interface PostsItemProps {
   upvotes: number
 }
 
-export const PostsItem: FC<PostsItemProps> = ({
+export const PostCard: FC<PostCardProps> = ({
   id,
   title,
   description,
@@ -21,20 +23,29 @@ export const PostsItem: FC<PostsItemProps> = ({
   comments,
   upvotes
 }) => {
+  const { postId } = useParams()
+
   return (
     <div className='section flex items-start gap-4 transition-colors duration-200'>
-      <button className='button flex flex-col items-center p-2.5'>
+      <Button variant='secondary' className='flex flex-col items-center p-2.5'>
         <IoIosArrowUp className='text-blue-700' size={20} />
         <span className='font-bold text-black'>{upvotes}</span>
-      </button>
+      </Button>
       <div className='flex flex-auto flex-col gap-2'>
-        <Link to={`/posts/${id}`} className='text-xl font-bold hover:underline'>
-          {title}
-        </Link>
-        <p className='text-gray-600'>{description}</p>
+        <h2 className='text-xl font-bold'>
+          {!postId && (
+            <Link to={`/posts/${id}`} className='hover:underline'>
+              {title}
+            </Link>
+          )}
+          {postId && title}
+        </h2>
+        <p className={cn('text-gray-600', !postId && 'line-clamp-2')}>
+          {description}
+        </p>
         <div className='button'>{categories[category]}</div>
       </div>
-      <div className='flex items-center gap-2 self-center text-gray-600'>
+      <div className='flex items-center gap-2 self-end text-gray-600'>
         <FiMessageCircle size={20} />
         <span className='text-lg font-bold'>{comments}</span>
       </div>
