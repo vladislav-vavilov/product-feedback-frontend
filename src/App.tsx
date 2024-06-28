@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Settings } from './pages/Settings'
 import { Post } from './pages/Post'
+import { Login } from './pages/Login'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route path=':postId' element={<Post />} />
       </Route>
       <Route path='/settings' element={<Settings />} />
+      <Route path='/login' element={<Login />} />
     </Routes>
   )
 }
