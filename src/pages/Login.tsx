@@ -1,13 +1,25 @@
-import { FC } from 'react'
-import { useMultistage } from '../hooks/useMultistage'
+import { FC,  useContext,  } from 'react'
+import { LoginContext, LoginContextProvider } from '../contexts/LoginContext'
+import { LoginContextValue } from '../types/contexts'
 
 export const Login: FC = () => {
-  const {
-    currentStepIndex,
-    functions: { prev, next }
-  } = useMultistage([<NameForm />, <PasswordForm />, <SuccessMessage />])
+  const steps = [<NameForm />, <PasswordForm />, <SuccessMessage />]
 
-  return <div>Login</div>
+  return (
+    <div className='rounded-md bg-white p-4 shadow-lg'>
+      <LoginContextProvider steps={steps}>
+        <LoginCurrentStep />
+      </LoginContextProvider>
+    </div>
+  )
+}
+
+const LoginCurrentStep: FC = () => {
+  const { steps, currentStepIndex } = useContext(
+    LoginContext
+  ) as LoginContextValue
+
+  return steps[currentStepIndex]
 }
 
 const NameForm: FC = () => {

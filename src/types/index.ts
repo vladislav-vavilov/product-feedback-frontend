@@ -12,3 +12,10 @@ export type User = {
   lastName: string
   avatar: string
 }
+
+export type FormDataState = {
+  displayName: string
+  username: string
+  password: string
+  passwordConfirm: string
+}
