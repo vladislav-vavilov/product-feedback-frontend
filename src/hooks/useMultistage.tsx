@@ -17,5 +17,11 @@ export const useMultistage = (steps: ReactNode[]) => {
     })
   }, [steps.length])
 
-  return { steps, currentStepIndex, functions: { prev, next } }
+  return {
+    steps,
+    currentStepIndex,
+    isFirst: currentStepIndex === 0,
+    isLast: currentStepIndex === steps.length - 1,
+    functions: { prev, next }
+  }
 }

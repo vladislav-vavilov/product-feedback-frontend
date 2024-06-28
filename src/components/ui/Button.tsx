@@ -1,8 +1,9 @@
-import { FC, ReactNode } from 'react'
+import { ButtonHTMLAttributes, FC, MouseEvent, ReactNode } from 'react'
 import { cn } from '../../utils'
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode
+  onClick?: (e: MouseEvent) => void
   className?: string
   variant?: 'primary' | 'secondary'
   size?: 'sm' | 'base'
@@ -10,12 +11,15 @@ interface ButtonProps {
 
 export const Button: FC<ButtonProps> = ({
   children,
+  onClick,
   className,
   variant = 'primary',
-  size = 'base'
+  size = 'base',
+  ...props
 }) => {
   return (
     <button
+      onClick={onClick}
       className={cn(
         'button',
         {
@@ -24,6 +28,7 @@ export const Button: FC<ButtonProps> = ({
         },
         className
       )}
+      {...props}
     >
       {children}
     </button>
