@@ -7,7 +7,14 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 
-const NameForm: FC = () => {
+const Email: FC = () => {
+  const { register } = useFormContext()
+  return (
+    <Input name='email' register={register} placeholder='Enter your email' />
+  )
+}
+
+const Name: FC = () => {
   const { register } = useFormContext()
 
   return (
@@ -16,6 +23,7 @@ const NameForm: FC = () => {
         name='displayName'
         register={register}
         placeholder='Enter your name'
+        autoFocus
       />
       <Input
         name='username'
@@ -26,17 +34,20 @@ const NameForm: FC = () => {
   )
 }
 
-const PasswordForm: FC = () => {
+const Password: FC = () => {
   const { register } = useFormContext()
 
   return (
     <>
       <Input
+        type='password'
         name='password'
         register={register}
         placeholder='Enter your password'
+        autoFocus
       />
       <Input
+        type='password'
         name='passwordConfirm'
         register={register}
         placeholder='Repeat your password'
@@ -45,26 +56,35 @@ const PasswordForm: FC = () => {
   )
 }
 
+const emailSchema = z.object({
+  email: z.string().email()
+})
+
 const nameSchema = z.object({
   displayName: z.string().min(3),
   username: z.string()
 })
 
 const passwordSchema = z.object({
-  password: z.string().min(2),
+  password: z.string().min(6),
   passwordConfirm: z.string()
 })
 
 const steps = [
   {
+    title: 'Enter your email',
+    formSchema: emailSchema,
+    node: <Email />
+  },
+  {
     title: 'Enter your name',
     formSchema: nameSchema,
-    node: <NameForm />
+    node: <Name />
   },
   {
     title: 'Enter your password',
     formSchema: passwordSchema,
-    node: <PasswordForm />
+    node: <Password />
   }
 ]
 
@@ -104,6 +124,7 @@ export const Login: FC = () => {
       </div>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
+        noValidate
         className='flex h-full w-full basis-1/2 flex-col p-4'
       >
         <div className='flex items-center gap-2 self-end'>
